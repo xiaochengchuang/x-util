@@ -7,7 +7,7 @@
     XNodeGetStruct(node, structType, nodeMemberName)
 
 #define XStackPopForeach(head, iteratorNode) \
-    while (iteratorNode = XStackPop(head)) 
+    while (iteratorNode = XStackPop(head))
 
 typedef XNode XStackNode;
 

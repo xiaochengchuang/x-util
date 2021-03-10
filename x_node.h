@@ -8,19 +8,19 @@
 #define XNodeGetStruct(node, structType, nodeMemberName) \
     (type *)((char *)node - XNodeOffsetOf(structType, nodeMemberName))
 
+struct _XNode
+{
+    int isHead;          /*indicates whether it is a head node*/
+    struct _XNode *prev; /*point to prev node*/
+    struct _XNode *next; /*point to next node*/
+};
+
+typedef struct _XNode XNode;
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
-struct _XNode
-{
-    int isHead;             /*indicates whether it is a head node*/
-    struct _XNode *prev;  /*point to prev node*/
-    struct _XNode *next;  /*point to next node*/
-};
-
-typedef struct _XNode XNode;
 
 static inline void XNodeHeadInit(XNode *head)
 {

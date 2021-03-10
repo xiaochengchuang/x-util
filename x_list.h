@@ -6,24 +6,23 @@
 #define XListNodeGetStruct(node, structType, nodeMemberName) \
     XNodeGetStruct(node, structType, nodeMemberName)
 
-#define XListForeach(head, iteratorNode)       \
+#define XListForeach(head, iteratorNode)  \
     for (iteratorNode = XListFirst(head); \
-         iteratorNode != NULL;                  \
+         iteratorNode != NULL;            \
          iteratorNode = XListNext(iteratorNode))
 
 /* safe for XListRemove */
-#define XListForeachSafe(head, iteratorNode, tmpNode)                                                                    \
+#define XListForeachSafe(head, iteratorNode, tmpNode)                                                        \
     for (iteratorNode = XListFirst(head), tmpNode = (iteratorNode == NULL ? NULL : XListNext(iteratorNode)); \
-         iteratorNode != NULL;                                                                                              \
+         iteratorNode != NULL;                                                                               \
          iteratorNode = tmpNode, tmpNode = (iteratorNode == NULL ? NULL : XListNext(iteratorNode)))
+
+typedef XNode XListNode;
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
-
-typedef XNode XListNode;
 
 static inline void XListHeadInit(XListNode *head)
 {
