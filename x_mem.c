@@ -38,3 +38,46 @@ void XMemFree(void *addr)
         free(addr);
     }
 }
+
+char *XMemStrdup(const char *str)
+{
+    char *result;
+    int len;
+    if (str == NULL)
+    {
+        return NULL;
+    }
+
+    len = strlen(str);
+    result = (char *)XMapMalloc(len + 1);
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    strncpy(result, str, len);
+    result[len] = '\0';
+    return result;
+}
+
+char *XMemStrndup(const char *str, size_t n)
+{
+    char *result;
+    int len;
+    if (str == NULL)
+    {
+        return NULL;
+    }
+
+    len = strlen(str);
+    len = len > n ? n : len;
+    result = (char *)XMapMalloc(len + 1);
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    strncpy(result, str, len);
+    result[len] = '\0';
+    return result;
+}
