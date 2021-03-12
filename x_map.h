@@ -32,13 +32,13 @@ bool XMapIsContains(XMap *map, const char *key);
 
 int XMapRemove(XMap *map, const char *key);
 
-XMapPair *XMapGetFirstPair(XMap *map);
+int XMapGetFirstPair(XMap *map, XMapPair **outMapPair);
 
-XMapPair *XMapPairGetNext(XMapPair *mapPair);
+int XMapPairGetNext(XMapPair *mapPair, XMapPair **outMapPair);
 
-const char *XMapPairGetKey(XMapPair *mapPair);
+int XMapPairGetKey(XMapPair *mapPair, char **outKey);
 
-void *XMapPairGetValue(XMapPair *mapPair);
+int XMapPairGetValue(XMapPair *mapPair, void **outValue);
 
 #ifdef __cplusplus
 }
