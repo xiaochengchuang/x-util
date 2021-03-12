@@ -3,17 +3,17 @@
 
 #include <stddef.h>
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 #define XMemFreeSafe(addr) \
     do                     \
     {                      \
         XMemFree(addr);    \
         addr = NULL;       \
     } while (0)
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 void *XMemAlloc(size_t size);
 
