@@ -39,7 +39,7 @@ static inline int XListNodeIsHead(XListNode *node)
     return XNodeIsHead(node);
 }
 
-static inline XListNode *XListfirst(XListNode *head)
+static inline XListNode *XListFirst(XListNode *head)
 {
     return XNodeNext(head);
 }
