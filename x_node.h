@@ -6,7 +6,7 @@
 #define XNodeOffsetOf(type, member) \
     ((size_t) & ((type *)0)->member)
 #define XNodeGetStruct(node, structType, nodeMemberName) \
-    (type *)((char *)node - XNodeOffsetOf(structType, nodeMemberName))
+    ((node) == NULL ? NULL : (type *)((char *)(node) - XNodeOffsetOf(structType, nodeMemberName)))
 
 struct _XNode
 {
