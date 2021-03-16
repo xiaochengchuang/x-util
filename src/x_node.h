@@ -3,10 +3,10 @@
 
 #include <stddef.h>
 
-#define XNodeOffsetOf(type, member) \
-    ((size_t) & ((type *)0)->member)
+#define XNodeOffsetOf(structType, nodeMember) \
+    ((size_t) & ((nodeMember *)0)->nodeMember)
 #define XNodeGetStruct(node, structType, nodeMemberName) \
-    ((node) == NULL ? NULL : (type *)((char *)(node) - XNodeOffsetOf(structType, nodeMemberName)))
+    (structType *)((node) == NULL ? NULL : ((char *)(node) - XNodeOffsetOf(structType, nodeMemberName)))
 
 struct _XNode
 {
