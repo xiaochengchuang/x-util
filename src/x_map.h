@@ -3,13 +3,17 @@
 
 #include <stdbool.h>
 
-#include "x_list.h"
-
 #define X_MAP_UPDATE 1
 #define X_MAP_SUCCESS 0
 #define X_MAP_NOT_FOUND -1
 #define X_MAP_NO_MEM -2
-#define X_MAP_ERR_ARG -2
+#define X_MAP_ERR_ARG -3
+
+
+#define XMapForeach(map, iteratorMapPair, tmpMapPair)                                                                                            \
+    for (XMapGetFirstPair(map, &iteratorMapPair), (iteratorMapPair == NULL ? tmpMapPair = NULL : XMapPairGetNext(iteratorMapPair, &tmpMapPair)); \
+         iteratorMapPair != NULL;                                                                                                                \
+         iteratorMapPair = tmpMapPair, (iteratorMapPair == NULL ? tmpMapPair = NULL : XMapPairGetNext(iteratorMapPair, &tmpMapPair)))
 
 struct _XMap;
 typedef struct _XMap XMap;

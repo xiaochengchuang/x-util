@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "x_list.h"
 #include "x_map.h"
 
 #ifdef X_MAP_USE_X_MEM
@@ -60,14 +61,14 @@ int XMapPut(XMap *map, const char *key, const void *value)
     mapTmp = (XMap *)XMapCalloc(1, sizeof(XMap));
     if (mapTmp == NULL)
     {
-        return X_MAP_NO_MEM；
+        return X_MAP_NO_MEM;
     }
 
     keyCopy = XMapStrdup(key);
     if (keyCopy == NULL)
     {
         XMapFree(mapTmp);
-        return X_MAP_NO_MEM；
+        return X_MAP_NO_MEM;
     }
 
     XListNodeInit(&mapTmp->list);
@@ -165,12 +166,18 @@ int XMapGetFirstPair(XMap *map, XMapPair **outMapPair)
     XListNode *firstNode;
     XMapPair *result = NULL;
 
-    if (map == NULL || outMapPair == NULL)
+    if (outMapPair == NULL)
     {
         return X_MAP_ERR_ARG;
     }
 
-    firstNode = XListFirst(map->list);
+    if (mapPair == NULL)
+    {
+        outMapPair = NULL;
+        return X_MAP_ERR_ARG;
+    }
+
+    firstNode = XListFirst(&map->list);
     if (firstNode == NULL)
     {
         *outMapPair = NULL;
@@ -186,12 +193,18 @@ int XMapPairGetNext(XMapPair *mapPair, XMapPair **outMapPair)
     XListNode *nextNode;
     XMapPair *result = NULL;
 
-    if (mapPair == NULL || outMapPair == NULL)
+    if (outMapPair == NULL)
     {
         return X_MAP_ERR_ARG;
     }
 
-    nextNode = XListNext(mapPair->list);
+    if (mapPair == NULL)
+    {
+        outMapPair = NULL;
+        return X_MAP_ERR_ARG;
+    }
+
+    nextNode = XListNext(&mapPair->list);
     if (nextNode == NULL)
     {
         *outMapPair = NULL;
@@ -204,8 +217,14 @@ int XMapPairGetNext(XMapPair *mapPair, XMapPair **outMapPair)
 
 int XMapPairGetKey(XMapPair *mapPair, char **outKey)
 {
-    if (mapPair == NULL || outKey == NULL)
+    if (outKey == NULL)
     {
+        return X_MAP_ERR_ARG;
+    }
+
+    if (mapPair == NULL)
+    {
+        outMapPair = NULL;
         return X_MAP_ERR_ARG;
     }
 
@@ -215,8 +234,14 @@ int XMapPairGetKey(XMapPair *mapPair, char **outKey)
 
 int XMapPairGetValue(XMapPair *mapPair, void **outValue)
 {
-    if (mapPair == NULL || outValue == NULL)
+    if (outValue == NULL)
     {
+        return X_MAP_ERR_ARG;
+    }
+
+    if (mapPair == NULL)
+    {
+        outMapPair = NULL;
         return X_MAP_ERR_ARG;
     }
 
