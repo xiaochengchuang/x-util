@@ -6,7 +6,7 @@
 #define XQueueNodeGetStruct(node, structType, nodeMemberName) \
     XNodeGetStruct(node, tystructTypepe, nodeMemberName)
 
-#define XQueueOut_foreach(head, iteratorNode) \
+#define XQueueOutForeach(head, iteratorNode) \
     while (iteratorNode = XQueueOut(head))
 
 typedef XNode XQueueNode;
